@@ -1,11 +1,11 @@
-# Detect English module
+# Detect Words module
 eng = 'eng'
 
 def loadDictionary(language):
     file = open('./dictionaries/%s.dic' % (language))
     validWords = {}
     for word in file.read().split('\n'):
-        validWords[word] = None
+        validWords[word] = language     # I set this to have a tag in case I ever want to try implementing new languages
     file.close()
     return validWords
 
@@ -36,7 +36,7 @@ def removeNonLetters(message):
     return ''.join(lettersOnly)
 
 def isValid(message, wordPercentage=20, lettersPercentage=85):
-    wordsMatch = getValidCount(message) * 100 >= wordPercentage
+    wordsMatch = getValidCount(message, language) * 100 >= wordPercentage
     numLetters = len(removeNonLetters(message))
     messageLettersPercentage = float(numLetters) / len(message) * 100
     lettersMatch = messageLettersPercentage >= lettersPercentage
