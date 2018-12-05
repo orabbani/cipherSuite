@@ -4,10 +4,10 @@
 # string encrypt(message, key)
 # string decrypt(message, key)
 
-import random, SYMBOLS as S
+import random, symbols
 
 BAD_INPUT = 'Bad input. Try agian'
-SYMBOLS = S.GET()
+SYMBOLS = symbols.get()
 KEY_LIMIT = len(SYMBOLS)
 
 # Generates and returns an int (key)

@@ -1,6 +1,4 @@
 # Detect Words module
-eng = 'eng'
-
 def loadDictionary(language):
     file = open('./dictionaries/%s.dic' % (language))
     validWords = {}
@@ -28,16 +26,16 @@ def getValidCount(message, language):
             matches += 1
     return float(matches) / len(possibleWords)
 
-def removeNonLetters(message):
+def removeNonLetters(message, language):
     lettersOnly = []
     for symbol in message:
-        if symbol in charset:
+        if symbol in charset(language):
             lettersOnly.append(symbol)
     return ''.join(lettersOnly)
 
 def isValid(message, wordPercentage=20, lettersPercentage=85):
     wordsMatch = getValidCount(message, language) * 100 >= wordPercentage
-    numLetters = len(removeNonLetters(message))
+    numLetters = len(removeNonLetters(message, language))
     messageLettersPercentage = float(numLetters) / len(message) * 100
     lettersMatch = messageLettersPercentage >= lettersPercentage
     return wordsMatch and lettersMatch
