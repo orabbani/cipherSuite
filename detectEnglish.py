@@ -1,19 +1,20 @@
 # Detect English module
+eng = 'eng'
 
-UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'
+def loadDictionary(language):
+    file = open('./dictionaries/%s.dic' % (language))
+    validWords = {}
+    for word in file.read().split('\n'):
+        validWords[word] = None
+    file.close()
+    return validWords
 
-def loadDictionary():
-    dictionaryFile = open('dictionary.eng.txt')
-    englishWords = {}
-    for word in dictionaryFile.read().split('\n'):
-        englishWords[word] = None
-    dictionaryFile.close()
-    return englishWords
+def charset(language):
+    file = open('./charsets/%s.char' % (language))
+    return file.read().lower() + ' \t\n'
 
-ENGLISH_WORDS = loadDictionary()
-
-def getEnglishCount(message):
+def getValidCount(message, language):
+    validWords = loadDictionary(language)
     message = message.upper()
     message = removeNonLetters(message)
     possibleWords = message.split()
@@ -23,19 +24,19 @@ def getEnglishCount(message):
 
     matches = 0
     for word in possibleWords:
-        if word in ENGLISH_WORDS:
+        if word in validWords:
             matches += 1
     return float(matches) / len(possibleWords)
 
 def removeNonLetters(message):
     lettersOnly = []
     for symbol in message:
-        if symbol in LETTERS_AND_SPACE:
+        if symbol in charset:
             lettersOnly.append(symbol)
     return ''.join(lettersOnly)
 
-def isEnglish(message, wordPercentage=20, lettersPercentage=85):
-    wordsMatch = getEnglishCount(message) * 100 >= wordPercentage
+def isValid(message, wordPercentage=20, lettersPercentage=85):
+    wordsMatch = getValidCount(message) * 100 >= wordPercentage
     numLetters = len(removeNonLetters(message))
     messageLettersPercentage = float(numLetters) / len(message) * 100
     lettersMatch = messageLettersPercentage >= lettersPercentage
