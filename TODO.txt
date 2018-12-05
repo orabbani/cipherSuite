@@ -1,0 +1,5 @@
+- In symbols.py:
+	Write a method to create a scrambled SYMBOLS list.
+- Write bruteforce decryption for individual ciphers using an isEnglish() implementation
+- Write a method to generate a key using multiple cipher keys and scrambled symbols
+- Set up github repository
