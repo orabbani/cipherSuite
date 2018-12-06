@@ -1,3 +1,11 @@
-charsets ./charsets
-dictionaries ./dictionaries
-symbols ./symbols
+# Use '#' to comment otherwise empty lines
+# Everything past folderPath is ignored so comments may also be left there
+# <folderName> <folderPath> // One space between values
+charsets /library/charsets/
+cipher /modules/cipher/
+dictionaries /library/dictionaries/
+symbols /library/symbols/
+utility /modules/utility/
+external /modules/external/
+testResults /testResults/ 
+errorLog /errorLog/

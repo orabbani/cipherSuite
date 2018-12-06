@@ -1,13 +1,11 @@
 # Basic interface for message input
 
-# string BADPATH
-# string BADMESSAGE
 # string getInput()
 # string getFile()
 # string getFile_(path)
 # bool isValid(message)
 
-import pyperclip, os, symbols
+import pyperclip, os, symbols, reportError
 
 SYMBOLS = symbols.get()
 BADPATH = 'ERROR: Bad Path'
@@ -17,6 +15,8 @@ BADMESSAGE = 'ERROR: Bad Message'
 def isValid(message):
     for symbol in message:
         if symbol not in SYMBOLS:
+            print('ERROR:SYMBOL_NOT_IN_LIBRARY: %s' % (symbol))
+            reportError.invalidSymbol(symbol)
             return BADMESSAGE
     return message
 # END isValid
@@ -35,6 +35,7 @@ def getInput():
 # Gets a message in a file without prompting for input
 def getFile_(path):
     if not os.path.exists(path):
+        print('ERROR:PATH_NOT_FOUND: %s' % (path))
         return BADPATH
     
     file = open(path)

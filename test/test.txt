@@ -1,6 +1,0 @@
-Test line 1
-tEst line 2
-teSt line 3
-tesT line 4
-test Line 5
-test lIne 6
