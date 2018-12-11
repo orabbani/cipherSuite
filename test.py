@@ -1,4 +1,10 @@
-sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import sys
+sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
+import paths
+import paths
+sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
+sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
+import paths
 import paths
 import cipherSuite
 import caesarCipher as cc 

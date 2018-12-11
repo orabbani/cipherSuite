@@ -1,5 +1,3 @@
-sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
-import paths
 # 1. paths first so cipherSuite can find everything
 import paths
 # 2. python modules
