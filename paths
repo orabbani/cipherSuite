@@ -1,6 +1,7 @@
 # Use '#' to comment otherwise empty lines
 # Everything past folderPath is ignored so comments may also be left there
 # <folderName> <folderPath> // One space between values
+cipherSuite /
 charsets /library/charsets/
 cipher /modules/cipher/
 dictionaries /library/dictionaries/

@@ -1,3 +1,5 @@
+sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import paths
 # Detect Words module
 def loadDictionary(language):
     file = open('./dictionaries/%s.dic' % (language))

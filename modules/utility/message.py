@@ -1,3 +1,6 @@
+sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import paths
+import C:\Users\KM\Desktop\cipherSuite/paths.py
 # Basic interface for message input
 
 # string getInput()

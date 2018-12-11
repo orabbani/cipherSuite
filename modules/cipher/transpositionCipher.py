@@ -1,3 +1,5 @@
+sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import paths
 # Simple transposition cipher encryption/decryption
 
 # int getKey(message)

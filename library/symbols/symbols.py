@@ -1,3 +1,5 @@
+sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import paths
 import cipherSuite
 symPath = cipherSuite.path['symbols'] + 'valid.sym'
 file = open(symPath)

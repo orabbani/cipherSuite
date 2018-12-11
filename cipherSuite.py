@@ -1,22 +1,20 @@
+sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import paths
+# 1. paths first so cipherSuite can find everything
+import paths
+# 2. python modules
 import sys, os
-
-path = {}
-file = open('paths')
-paths = file.read()
-for line in paths.split('\n'):
-    if line[0] != '#': # Allows for commenting ;)
-        word = line.split()
-        cwd = os.path.dirname(os.path.abspath(__file__))
-        fullPath = str(cwd) + word[1]
-        path[word[0]] = fullPath            
-        sys.path.insert(0, fullPath)
-
+# 3rd party modules
 import pyperclip
-import detectWords as dw # isValid(message, wordPercentage, lettersPercentage)
-import message as me # getInput, getFile(), getFile_(path), isValid(message)
+# symbols is a base dependency
 import symbols # get()
+# message is necessary for ciphers
+import message as me # getInput, getFile(), getFile_(path), isValid(message)
+# ciphers here. doesn't matter for now what order they're in
 import caesarCipher as cc # getKey(), encrypt(message, key), decrypt(message, key)
 import transpositionCipher as tc # getKey(message), encrypt(message, key), decrypt(message, key)
+# this is a utility and hasn't been implemented yet
+import detectWords as dw # isValid(message, wordPercentage, lettersPercentage)
 
 if __name__ == '__main__':
     print('Cipher Suite') 

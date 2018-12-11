@@ -1,3 +1,5 @@
+sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+import paths
 import os, sys, cipherSuite as cs, symbols
 
 def invalidSymbol(symbol):
