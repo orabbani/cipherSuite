@@ -1,5 +1,6 @@
 import sys, os
-import paths
+import paths # path[folder], writePathsToPy()
+paths.writePathsToPy()
 
 # Third party modules
 import pyperclip
