@@ -1,11 +1,5 @@
 import sys
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-import paths
-import paths
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-import paths
-sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+sys.path.insert(0, r'C:\Users\KM\Desktop\cipherSuite\paths.py')
 import paths
 # Simple transposition cipher encryption/decryption
 
@@ -54,3 +48,4 @@ def decrypt(message, key):
 
     return ''.join(translation)
 # END decrypt
+

@@ -1,21 +1,15 @@
 import sys
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
+sys.path.insert(0, r'C:\Users\KM\Desktop\cipherSuite\paths.py')
 import paths
-import paths
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-import paths
-sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
-import paths
-import C:\Users\KM\Desktop\cipherSuite/paths.py
 # Basic interface for message input
 
 # string getInput()
 # string getFile()
 # string getFile_(path)
 # bool isValid(message)
-
-import pyperclip, os, symbols, reportError
+sys.path.insert(0, paths.path['symbols'])
+import pyperclip, os, reportError
+import symbols
 
 SYMBOLS = symbols.get()
 BADPATH = 'ERROR: Bad Path'
@@ -59,4 +53,5 @@ def getFile():
     path = input('File to be encrypted: ')
     return getFile_(path)
 # END getFile
+
 

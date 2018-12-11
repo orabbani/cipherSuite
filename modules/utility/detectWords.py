@@ -1,11 +1,5 @@
 import sys
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-import paths
-import paths
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-sys.path.insert(0, '/home/pi/cipherSuite/paths.py')
-import paths
-sys.path.insert(0, 'C:\Users\KM\Desktop\cipherSuite\paths.py')
+sys.path.insert(0, r'C:\Users\KM\Desktop\cipherSuite\paths.py')
 import paths
 # Detect Words module
 def loadDictionary(language):
@@ -48,3 +42,4 @@ def isValid(message, wordPercentage=20, lettersPercentage=85):
     messageLettersPercentage = float(numLetters) / len(message) * 100
     lettersMatch = messageLettersPercentage >= lettersPercentage
     return wordsMatch and lettersMatch
+

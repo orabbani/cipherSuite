@@ -1,5 +1,4 @@
 import paths
-import paths
 import sys, os
 
 path = {}
@@ -24,15 +23,29 @@ def writePathsToPy():
                     file = open(pyPath)
                     pyContents = file.read()
                     file.close()
-                    string = 'import sys\n'
-                    string += "sys.path.insert(0, '%s')\n" % (os.path.abspath(__file__))
-                    string += 'import paths\n'
-                    string += pyContents
-                    print(string)
-                    file = open(pyPath, 'w')
-                    file.write(string)
-                    file.close()
 
+                    importSys = 'import sys\n'
+                    insertDir = "sys.path.insert(0, r'%s')\n" % (os.path.abspath(__file__))
+                    importPaths = 'import paths\n'
+                    
+                    if not importPaths in pyContents:
+                        pyContents = importPaths + pyContents
+                    if not insertDir in pyContents:
+                        if not 'sys.path.insert(0, ' in pyContents:
+                            pyContents = insertDir + pyContents
+                        else:
+                            splitContents = pyContents.split('\n')
+                            pyContents = ''
+                            for line in range(len(splitContents)):
+                                if 'sys.path.insert(0, ' in splitContents[line]:
+                                    splitContents[line] = insertDir[:-1]
+                                pyContents += splitContents[line] + '\n'
+                    if not importSys in pyContents:
+                        pyContents = importSys + pyContents
+
+                    file = open(pyPath, 'w')
+                    file.write(pyContents)
+                    file.close()
 
 def test():
     writePathsToPy()
