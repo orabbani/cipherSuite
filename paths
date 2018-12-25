@@ -2,11 +2,11 @@
 # Everything past folderPath is ignored so comments may also be left there
 # <folderName> <folderPath> // One space between values
 cipherSuite /
+errorLog /errorLog/
+library /library
 charsets /library/charsets/
-cipher /modules/cipher/
 dictionaries /library/dictionaries/
 symbols /library/symbols/
-utility /modules/utility/
+cipher /modules/cipher/
 external /modules/external/
-testResults /testResults/ 
-errorLog /errorLog/
+utility /modules/utility/

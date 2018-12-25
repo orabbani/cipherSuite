@@ -1,4 +1,0 @@
-TODO:
-
--Write a script to automate symbol addition
--Figure out encoding issues with certain text files
