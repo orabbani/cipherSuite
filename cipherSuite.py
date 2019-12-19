@@ -25,7 +25,8 @@
 
 import sys, os, secrets, string, math
 
-CHARSET = string.ascii_letters + ' ' + string.digits
+CHARSET = string.ascii_letters + string.digits + string.punctuation + string.whitespace
+
 class Caesar:
     class Key:
         # Random key generator
@@ -121,7 +122,7 @@ class Transposition:
                 if self.set(key): None
                 # If key was out of bounds, generate a new key and print
                 else:
-                    if v: print('ERR_TRA: Bad key given. Generating a new one')
+                    if v: print('ERR_TRA_INIT: Bad key given. Generating a new one')
                     self.generate(message)
                     if v: self.print()
             # If var was not passed, generate a key
@@ -132,6 +133,9 @@ class Transposition:
     def getKeyLimit(self): return self.key.limit
 
     def encrypt(self):
+        if not self.message:
+            print('ERR_TRA_ENC: no value assigned to Transposition.message')
+        if not self.key: self.key = self.Key(self.message)
         translation = [''] * self.getKey()
         for column in range(self.getKey()):
             index = column
@@ -142,7 +146,7 @@ class Transposition:
 
     def decrypt(self):
         columns = int(math.ceil(len(self.message) / float(self.getKey())))
-        rows = self.getKey
+        rows = self.getKey()
         shadows = (columns * rows) - len(self.message)
         translation = [''] * columns
         column = 0
@@ -156,20 +160,64 @@ class Transposition:
                 row += 1
         self.translation = ''.join(translation)
 
-    def __init__(self, message, key=None, mode=None):
-        self.message = message
-        if key: self.key = self.Key(message=message, key=key)
-        else: self.key = self.Key(message=message)
-        if mode and message and key:
-                if mode == 'e': self.encrypt()
-                elif mode == 'd': self.decrypt()
-                else: print('ERR_TRA_INIT: Invalid mode given')
-        if mode and not message:
-            print('ERR_TRA_INIT: Missing argument: message')
-        if mode and not key:
-            print('ERR_TRA_INIT: Missing argument: key')
+    def __init__(self, message=None, key=None, mode=None):
+        if message:
+            self.message = message
+            if key: self.key = self.Key(message=message, key=key)
+            else: self.key = self.Key(message=message)
+        
+        if mode:
+            if mode == 'e':
+                if not message: print('ERR_CAE_INIT: No message given.')
+                else: self.encrypt()
+            elif mode == 'd':
+                if not message: print('ERR_CAE_INIT: No message given.')
+                elif not key: print('ERR_CAE_INTI: No key given.')
+                else: self.decrypt()
+            else: print('ERR_CAE_INIT: Invalid mode given.')
 
 
+def join_keys(ciphers):
+    key = ''
+    for cipher in ciphers:
+        cName = cipher.__class__.__name__[:3].lower()
+        key += cName + str(cipher.getKey())
+    return key
+
+def test():
+    print('=========== Encryption ===========')
+    print('==== Transposition ====')
+    tMsg = 'This is a test string!'
+    t = Transposition(message=tMsg, mode='e')
+    tCrypt = t.translation
+    tKey = t.getKey()
+    print('msg:',tMsg)
+    print('crypt:',tCrypt)
+    print('key:',tKey)
+
+    print('==== Caesar ====')
+    cMsg = tCrypt
+    c = Caesar(message=cMsg, mode='e')
+    cCrypt = c.translation
+    cKey = c.getKey()
+    print('msg:',cMsg)
+    print('crypt:',cCrypt)
+    print('key:',cKey)
+
+    print('=========== Decryption ===========')
+    print('==== Caesar ====')
+    c = Caesar(message=cCrypt, key=cKey, mode='d')
+    cDCrypt = c.translation
+    print('dCrypt:',cDCrypt)
+
+    print('==== Transposition ====')
+    tCrypt = cDCrypt
+    t = Transposition(message=tCrypt, key=tKey, mode='d')
+    tDCrypt = t.translation
+    print('dCrypt:',tDCrypt)
+    
+    print('=========== Keys ===========')
+    print('==== Joining ====')
+    print(join_keys([c, t]))
 if __name__=='__main__':
-    c = Caesar('this is a test string', key=1, mode='e')
-    print(c.translation)
+    test()
