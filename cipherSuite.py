@@ -22,6 +22,17 @@
         'd':'decrypt'
     }
 '''
+'''
+# CLASS TRANSPOSITION
+# One liner print:
+    print(transposition(message='test message', key=42, mode='e').translation)
+# Intended usage:
+    c = Transposition(message, mode='e')
+    k = c.getKey()
+    t = c.translation
+# Additional parameters:
+    modes = { 'e':'encrypt', 'd':'decrypt' }
+'''
 
 # Import standard libraries
 import sys, os, secrets, string, math
