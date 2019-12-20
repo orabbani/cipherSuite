@@ -7,31 +7,28 @@
 #       to allow the library to generate a key upon encryption, and to
 #       use <Cipher>.getKey() to retrieve it for decryption.
 
+# Example usage:
 '''
-# CLASS CAESAR
-# One liner print:
+* One liner - print translation:
     print(Caesar(message='test message', key=42, mode='e').translation)
-# Intended usage:
+* Intended usage:
     c = Caesar(message, mode='e')
     k = c.getKey()
     t = c.translation
-# Additional parameters:
+* Additional parameters:
     Caesar(message, key, mode)
     modes = {
         'e':'encrypt',
         'd':'decrypt'
     }
-'''
-'''
-# CLASS TRANSPOSITION
-# One liner print:
-    print(transposition(message='test message', key=42, mode='e').translation)
-# Intended usage:
-    c = Transposition(message, mode='e')
-    k = c.getKey()
-    t = c.translation
-# Additional parameters:
-    modes = { 'e':'encrypt', 'd':'decrypt' }
+
+----- Disabling bad key verbosity -----  
+* Caesar:
+    c = Caesar()
+    c.key = c.Key(key=key, v=False)
+* Transposition:
+    c = Transposition(message=message)
+    c.key = c.Key(message=message, key=key, v=False)
 '''
 
 # Import standard libraries
@@ -65,7 +62,7 @@ class Caesar:
             # Check if key var was passed
             if key:
                 # Passes to set. Does nothing if accepted
-                if self.set(key): None
+                if self.set(key) == 1: None
                 # If key was out of bounds, generate a new key and print
                 else:
                     if v: print('ERR_CAE: Bad key given. Generating a new one')
@@ -120,7 +117,8 @@ class Caesar:
 class Transposition:
     class Key:
         def generate(self, message):
-            self.key = secrets.randbelow(self.limit - 2) + 2
+            self.key = secrets.randbelow(self.limit) + 2
+            while self.key > self.limit: self.key -= 1
 
         def print(self): print('KEY_TRA:', self.key)
 
@@ -135,7 +133,7 @@ class Transposition:
             self.limit = math.floor(len(message) / 2)
             if key:
                 # Passes to set. Does nothing if accepted
-                if self.set(key): None
+                if self.set(key) == 1: None
                 # If key was out of bounds, generate a new key and print
                 else:
                     if v: print('ERR_TRA_INIT: Bad key given. Generating a new one')
@@ -176,7 +174,7 @@ class Transposition:
                 row += 1
         self.translation = ''.join(translation)
 
-    def __init__(self, message=None, key=None, mode=None):
+    def __init__(self, message, key=None, mode=None):
         if message:
             self.message = message
             if key: self.key = self.Key(message=message, key=key)
@@ -192,13 +190,13 @@ class Transposition:
                 else: self.decrypt()
             else: print('ERR_CAE_INIT: Invalid mode given.')
 
-
-def join_keys(ciphers):
-    key = ''
-    for cipher in ciphers:
-        cName = cipher.__class__.__name__[:3].lower()
-        key += cName + str(cipher.getKey())
-    return key
+class Key:
+    def join_keys(self, ciphers):
+        key = ''
+        for cipher in ciphers:
+            cName = cipher.__class__.__name__[:3].lower()
+            key += cName + str(cipher.getKey())
+        return key
 
 def test_all():
     print('=========== Encryption ===========')
@@ -234,7 +232,7 @@ def test_all():
     
     print('=========== Keys ===========')
     print('==== Joining ====')
-    print(join_keys([c, t]))
+    #print(join_keys([c, t]))
 
 def test_caesar(): None
 def test_Transposition(): None

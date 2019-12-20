@@ -42,3 +42,6 @@ CrackingCodesFiles/vigenereCipher.py
 CrackingCodesFiles/vigenereDictionaryHacker.py
 CrackingCodesFiles/vigenereHacker.py
 CrackingCodesFiles/wordPatterns.py
+lib/__pycache__/pyperclip.cpython-36.pyc
+__pycache__/cipherSuite.cpython-37.pyc
+__pycache__/cipherSuite.cpython-36.pyc
