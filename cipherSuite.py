@@ -25,9 +25,8 @@
 
 # Import standard libraries
 import sys, os, secrets, string, math
-# Set root for program
-root_path = os.getcwd()
-lib_path = os.path.join(root_path,'lib')
+# Append lib directory path to system path
+lib_path = os.path.join(os.getcwd(),'lib')
 sys.path.insert(0, lib_path)
 # Import additional libraries
 import pyperclip # pyperclip.copy(var) || var = pyperclip.paste()
