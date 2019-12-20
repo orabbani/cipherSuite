@@ -10,7 +10,7 @@
 '''
 # CLASS CAESAR
 # One liner print:
-    print(Caesar(message='test message', key=1, mode='e').translation)
+    print(Caesar(message='test message', key=42, mode='e').translation)
 # Intended usage:
     c = Caesar(message, mode='e')
     k = c.getKey()
@@ -23,7 +23,14 @@
     }
 '''
 
+# Import standard libraries
 import sys, os, secrets, string, math
+# Set root for program
+root_path = os.getcwd()
+lib_path = os.path.join(root_path,'lib')
+sys.path.insert(0, lib_path)
+# Import additional libraries
+import pyperclip # pyperclip.copy(var) || var = pyperclip.paste()
 
 CHARSET = string.ascii_letters + string.digits + string.punctuation + string.whitespace
 
@@ -88,7 +95,6 @@ class Caesar:
         if message: self.message = message
         if key: self.key = self.Key(key)
         else: self.key = self.Key()
-        
         if mode:
             if mode == 'e':
                 if not message: print('ERR_CAE_INIT: No message given.')
@@ -184,7 +190,7 @@ def join_keys(ciphers):
         key += cName + str(cipher.getKey())
     return key
 
-def test():
+def test_all():
     print('=========== Encryption ===========')
     print('==== Transposition ====')
     tMsg = 'This is a test string!'
@@ -219,5 +225,9 @@ def test():
     print('=========== Keys ===========')
     print('==== Joining ====')
     print(join_keys([c, t]))
+
+def test_caesar(): None
+def test_Transposition(): None
+
 if __name__=='__main__':
-    test()
+    test_all()
