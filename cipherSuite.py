@@ -111,7 +111,6 @@ class Caesar:
                 elif not key: print('ERR_CAE_INTI: No key given.')
                 else: self.decrypt()
             else: print('ERR_CAE_INIT: Invalid mode given.')
-            
 
 
 class Transposition:
@@ -190,13 +189,24 @@ class Transposition:
                 else: self.decrypt()
             else: print('ERR_CAE_INIT: Invalid mode given.')
 
+
 class Key:
     def join_keys(self, ciphers):
         key = ''
         for cipher in ciphers:
             cName = cipher.__class__.__name__[:3].lower()
             key += cName + str(cipher.getKey())
-        return key
+        self.key = key
+
+    def parse_key(self, key): None
+
+    def __init__(self, ciphers=None, key=None, mode=None):
+        if ciphers: 
+            self.ciphers = ciphers
+            if mode:
+                if mode == 'j': self.join_keys(ciphers)
+                if mode == 'p': self.parse_key(key)
+
 
 def test_all():
     print('=========== Encryption ===========')
@@ -236,6 +246,7 @@ def test_all():
 
 def test_caesar(): None
 def test_Transposition(): None
+
 
 if __name__=='__main__':
     test_all()
