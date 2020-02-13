@@ -113,6 +113,16 @@ class Caesar:
             else: print('ERR_CAE_INIT: Invalid mode given.')
 
 
+# TODO: Redo transposition to perform the following tasks:
+#   Break the message into blocks
+#   Assign values to rows based on value in block position
+#   Scramble rows
+'''
+[ 1 2 3 4 ]
+[         ]
+[ 3 4 1 2 ]
+
+'''
 class Transposition:
     class Key:
         def generate(self, message):
